@@ -1,0 +1,11 @@
+program desc:
+    crawler sohu news,then provide webapi by flask frame
+    用于学习熟悉python,记录自己踩的坑，记录心得。
+program technology:
+    flask
+    selenium
+    bs4
+    pickle
+    re
+    logging
+    docker
