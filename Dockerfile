@@ -1,6 +1,6 @@
 #FROM centos:7
 #FROM python:3.6.5
-FROM markadams/chromium-xvfb-py3
+FROM markadams/chromium-xvfb-py2
 # Set the working directory to /app
 WORKDIR /app
 # Copy the current directory contents into the container at /app

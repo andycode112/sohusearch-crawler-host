@@ -1,17 +1,17 @@
 '''
 @Author: your name
 @Date: 2020-05-15 08:52:23
-@LastEditTime: 2020-06-03 10:22:17
-@LastEditors: your name
+@LastEditTime: 2020-06-03 14:45:57
+@LastEditors: Please set LastEditors
 @Description: In User Settings Edit
 @FilePath: \python\sohu-crawler\app.py
 '''
 #coding:utf-8
-import os,flask,json,configparser
+import os,flask,json
 from server.serverinfoapi import serverinfo
 from server.sohuapi import sohuapi
 from server.Logger import Logger
-# from flask import request
+# from flask import request,configparser
 # from datetime import datetime
 # import urllib
 # from wsgiref.simple_server import make_server

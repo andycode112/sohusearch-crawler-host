@@ -1,13 +1,14 @@
 '''
 @Author: your name
 @Date: 2020-05-16 17:07:22
-@LastEditTime: 2020-06-03 10:23:40
+@LastEditTime: 2020-06-03 14:45:40
 @LastEditors: Please set LastEditors
 @Description: In User Settings Edit
 @FilePath: \python\sohu-crawler\server\sohuapi.py
 '''
 from flask import Blueprint,request
-import os,json,datetime,pickle,re,configparser
+import os,json,datetime,pickle,re
+#,configparser
 from selenium import webdriver
 from selenium.webdriver import ChromeOptions
 from bs4 import BeautifulSoup
