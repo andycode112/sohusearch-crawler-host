@@ -7,7 +7,9 @@ from selenium.webdriver import ChromeOptions
 from bs4 import BeautifulSoup
 from time import sleep
 from model.sohunews_model import sohunews_model
+from server.Logger import Logger
 
+log = Logger(name='sohuapi')
 sohuapi = Blueprint('sohuapi', __name__)
 
 @sohuapi.route('/search',methods=['get'])
@@ -27,10 +29,12 @@ def serverdate():
         option.add_argument('--disable-dev-shm-usage')
         browser = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver',options=option)
         browser.get('http://search.sohu.com/?keyword=%s' % _keyword)
+        log.info('http://search.sohu.com/?keyword=%s' % _keyword)
         for i in range(1,4):
             sleep(3)
             browser.execute_script('window.scrollTo(0, document.body.scrollHeight)') # vertical sliding，scrollHeight
             print('lond '+str(i)+' page')
+            log.info('lond '+str(i)+' page')
         res = browser.page_source
         if res != None and len(res) >0 :
             soup = BeautifulSoup(res, 'html.parser')
@@ -40,6 +44,7 @@ def serverdate():
                 contenttitle = news.select('.cards-content-title')
                 contentdesc = news.select('.cards-content-right-desc')
                 contentcomm = news.select('.cards-content-right-comm')
+                log.info(contenttitle + '     ' + contentdesc)
                 newitem = sohunews_model()
                 newitem.newtitle = contenttitle[0].text        
                 newitem.newurl = contenttitle[0].next['href']
@@ -58,6 +63,7 @@ def serverdate():
                 contenttitle = news.select('.plain-title')
                 contentdesc = news.select('.plain-content-desc')
                 contentcomm = news.select('.plain-content-comm')
+                log.info(contenttitle + '     ' + contentdesc)
                 newitem = sohunews_model()
                 newitem.newtitle = contenttitle[0].text        
                 newitem.newurl = contenttitle[0].next['href']
