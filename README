@@ -9,3 +9,56 @@ program technology:
     re
     logging
     docker
+    markadams/chromium-xvfb-py3
+
+docker 部署过程
+    #linux 安装python3.5.3
+        yum -y groupinstall "Development tools"
+        yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
+        yum install -y libffi-devel zlib1g-dev
+        yum install zlib* -y
+
+        wget https://www.python.org/ftp/python/3.5.3/Python-3.5.3.tar.xz
+        tar -xvJf  Python-3.5.3.tar.xz
+        mkdir /usr/local/python3 
+        cd Python-3.5.3/
+
+        ./configure --prefix=/usr/local/python3 --enable-optimizations --with-ssl 
+        make && make install
+
+        ln -s /usr/local/python3/bin/python3 /usr/local/bin/python3
+        ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3
+
+        python3 -V
+        pip3 -V
+
+    #linux 安装必须module
+        pip3 install flask -i https://mirrors.163.com/pypi/simple/
+        pip3 install BeautifulSoup4 -i https://mirrors.163.com/pypi/simple/ 
+        pip3 install selenium  -i https://mirrors.163.com/pypi/simple/ 
+    #测试python 脚本
+        python3 app.py
+        pip3 freeze > requirements.txt 
+
+    #镜像化及容器部署
+        docker build -t sohusearchhost . 
+        docker run -it -p 6500:5000 --name sohusearchhost --restart always --privileged=true sohusearchhost
+        #docker run -it -p 6500:8888 --name sohusearchhost -v /storage/docker/sohusearchhost:/app --restart always --privileged=true sohusearchhost
+        docker exec -it sohusearchhost bash
+        docker commit sohusearchhost sohunews-search-host
+
+        docker cp /root/sohusearch-crawler-host/server/sohuapi.py sohusearchhost:/app/server
+        docker rm -f sohusearchhost
+        docker rmi -f $(docker images -a | grep none | awk '!($3 in a){a[$3]=1;print $3}');
+
+    #镜像导出
+        docker save -o sohunews-search-host.tar sohunews-search-host
+        docker save sohunews-search-host > /sohunews-search-host.tar
+    #容器导出
+        docker export sohusearchhost  >sohusearchhost.tar
+        docker export -o sohusearchhost.tar sohusearchhost  #导出tar文件或二进制镜像文件img
+        docker export -o sohusearchhost.img sohusearchhost 
+
+    #镜像或容器导入
+        docker load --input /sohunews-search-host.tar
+        docker import sohusearchhost.img sohusearchhost-test
