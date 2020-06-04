@@ -73,11 +73,11 @@ def serverdate():
                 # print(newtitle.replace("\n", "") + '       ' + newauthor_time.replace("\n", ""))
                 mylist.append(newitem)
             
-            ret= {'success':True,'data:':mylist,'msg':''} # pickle.dumps(mylist)#dict(mylist) 
+            ret= {'success':True,'data':mylist,'msg':''} # pickle.dumps(mylist)#dict(mylist) 
         else:
-            ret= {'success':False,'data:':'','msg':'browser.get result is None or empty'}
+            ret= {'success':False,'data':'','msg':'browser.get result is None or empty'}
         browser.quit()   
     else:
-        ret= {'success':False,'data:':'','msg':'the keyword is None or empty'}
+        ret= {'success':False,'data':'','msg':'the keyword is None or empty'}
     
-    return pickle.dumps(ret) #json.dumps(ret,ensure_ascii=False)
+    return ret #pickle.dumps(ret) json.dumps(ret,ensure_ascii=False)
