@@ -1,11 +1,4 @@
-'''
-@Author: your name
-@Date: 2020-05-16 17:07:22
-@LastEditTime: 2020-06-03 14:45:40
-@LastEditors: Please set LastEditors
-@Description: In User Settings Edit
-@FilePath: \python\sohu-crawler\server\sohuapi.py
-'''
+#coding:utf-8
 from flask import Blueprint,request
 import os,json,datetime,pickle,re
 #,configparser
@@ -32,7 +25,7 @@ def serverdate():
         option.add_argument('headless') # set backgroud run option
         option.add_argument('--no-sandbox')
         option.add_argument('--disable-dev-shm-usage')
-        browser = webdriver.Chrome(executable_path='/usr/bin/chromedriver',options=option)
+        browser = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver',options=option)
         browser.get('http://search.sohu.com/?keyword=%s' % _keyword)
         for i in range(1,4):
             sleep(3)
