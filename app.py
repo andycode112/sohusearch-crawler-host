@@ -1,11 +1,3 @@
-'''
-@Author: your name
-@Date: 2020-05-15 08:52:23
-@LastEditTime: 2020-06-03 14:45:57
-@LastEditors: Please set LastEditors
-@Description: In User Settings Edit
-@FilePath: \python\sohu-crawler\app.py
-'''
 #coding:utf-8
 import os,flask,json
 from server.serverinfoapi import serverinfo
