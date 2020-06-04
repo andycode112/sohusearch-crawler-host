@@ -62,3 +62,9 @@ docker 部署过程
     #镜像或容器导入
         docker load --input /sohunews-search-host.tar
         docker import sohusearchhost.img sohusearchhost-test
+    #容器导入及运行
+    save -> load
+    export -> import
+
+    docker import sohusearchhost-container.tar  sohusearchhost
+    docker run --name sohusearchhost -p 6500:5000 --restart=always --privileged=true -w /app   -d sohusearchhost  python3 app.py   
